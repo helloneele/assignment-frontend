@@ -22,13 +22,16 @@ function goto(route){
   //console.log(window.history.state.pathname);
   console.log(window.history.length);
   let lastViewed;
-  if(window.history.state.pathname)
+  if(window.history.state)
     lastViewed = window.history.state.pathname;
   else
     lastViewed = false
 
-  // check if event is popstate and if last page visited is the same as current page
-  if(event && event.type != "popstate" && route != lastViewed){
+  // check if event is popstate
+  // event && event.type != "popstate"
+
+  //if last page visited is the same as current page
+  if(route != lastViewed){
     console.log("hi");
     window.history.pushState({
       pathname: route
@@ -61,7 +64,6 @@ export default function(route, fn) {
 
   // init if no params
   if(!route && !fn){
-    //console.log(1);
     initEventListeners();
     init()
   }
@@ -77,12 +79,8 @@ function initEventListeners () {
     nav[i].addEventListener('click', e => {
       console.log(e);
       e.preventDefault();
-      goto(e.srcElement.pathname)
+      goto(e.target.pathname)
     });
-  }
-
-  window.onpopstate = function (e) {
-    goto(e.state.pathname);
   }
 
   window.addEventListener('popstate', e => {

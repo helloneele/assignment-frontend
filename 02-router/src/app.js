@@ -11,8 +11,10 @@ function index() {
   $app.html(homeTpl())
 }
 
-function player() {
-  $app.html(playerTpl())
+function player(name) {
+  $app.html(playerTpl({
+    name
+  }))
 }
 
 function contact() {

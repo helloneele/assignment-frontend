@@ -23,7 +23,7 @@ function goto(route){
   let lastViewed = "";
   if(window.history.state)
     lastViewed = window.history.state.pathname
-
+    // TODO: nicht ausführen bei init
   if(path != lastViewed){
     window.history.pushState({
       pathname: path
@@ -43,8 +43,8 @@ export default function(route, fn) {
   }
   // init if no params
   if(!route && !fn){
-    initEventListeners()
     init()
+    initEventListeners()
   }
 }
 

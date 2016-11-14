@@ -20,7 +20,7 @@ function init(){
 function goto(route, init){
   const REGEX = /(\w+)/g
   let result = route.match(REGEX)
-  let uri = ""
+  let uri = ''
   let path = route
 
   if(result != null && result.length > 1 ){
@@ -34,10 +34,7 @@ function goto(route, init){
   if(!routes.has(route))
     route = '*'
 
-  let lastViewed = "";
-  if(window.history.state)
-    lastViewed = window.history.state.pathname
-
+  let lastViewed = window.history.state ? window.history.state.pathname : '';
   if(path != lastViewed && !init){
     window.history.pushState({
       pathname: path
@@ -51,8 +48,9 @@ function addEventListeners () {
   $(document).on('click', 'a', e => {
     let el = e.target
     let rel = $(el).attr('rel')
-    if (rel === 'external' || rel === 'download')
-      return;
+    let target = $(el).attr('target')
+    if (rel === 'external' || rel === 'download' || target === 'blank')
+      return
     e.preventDefault()
     goto(el.pathname)
   })

@@ -2,7 +2,7 @@ import $ from 'jquery'
 import router from './router'
 import homeTpl from './templates/home.hbs'
 import contactTpl from './templates/contact.hbs'
-import playerTpl from './templates/player.hbs'
+import playersTpl from './templates/players.hbs'
 import notFoundTpl from './templates/not-found.hbs'
 
 const $app = $('#app')
@@ -11,8 +11,8 @@ function index() {
   $app.html(homeTpl())
 }
 
-function player(name) {
-  $app.html(playerTpl({
+function players(name) {
+  $app.html(playersTpl({
     name
   }))
 }
@@ -26,7 +26,7 @@ function notFound() {
 }
 
 router('/', index)
-router('/players/:player', player)
+router('/players/:player', players)
 router('/contact', contact)
 router('*', notFound)
 router()

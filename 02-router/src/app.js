@@ -12,6 +12,7 @@ function index() {
 }
 
 function players(name) {
+  name = name.substr(0, 1).toUpperCase() + name.substr(1)
   $app.html(playersTpl({
     name
   }))

@@ -1,10 +1,10 @@
 import $ from 'jquery'
 
-const routes = new Map()
+const ROUTES = new Map()
 
 export default function(route, fn) {
   if(route && fn){
-    routes.set(route, fn)
+    ROUTES.set(route, fn)
     return
   }
   if(!route && !fn)
@@ -13,7 +13,7 @@ export default function(route, fn) {
 
 function init(){
   addEventListeners()
-  const path = window.location.pathname
+  const path = location.pathname
   goto(path, true)
 }
 
@@ -25,22 +25,21 @@ function goto(route, init){
 
   if(result != null && result.length > 1 ){
     uri = result.slice(-1)[0]
-    for (var r of routes) {
+    for (var r of ROUTES) {
       if(r.slice(-1)[0].name.indexOf(result[0]) != -1)
         route = r[0];
     }
   }
-
-  if(!routes.has(route))
+  if(!ROUTES.has(route))
     route = '*'
 
-  let lastViewed = window.history.state ? window.history.state.pathname : '';
-  if(path != lastViewed && !init){
-    window.history.pushState({
-      pathname: path
-    }, '', path)
-  }
-  let val = routes.get(route)
+  let lastViewed = history.state ? history.state.pathname : '';
+  if(init)
+    history.replaceState({pathname: path}, '', path)
+  else if(path != lastViewed)
+    history.pushState({pathname: path}, '', path)
+
+  let val = ROUTES.get(route)
   return val(uri)
 }
 
@@ -49,7 +48,7 @@ function addEventListeners () {
     let el = e.target
     let rel = $(el).attr('rel')
     let target = $(el).attr('target')
-    if (rel === 'external' || rel === 'download' || target === 'blank')
+    if (rel === 'external' || rel === 'download' || target === '_blank')
       return
     e.preventDefault()
     goto(el.pathname)

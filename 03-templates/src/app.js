@@ -5,8 +5,22 @@ import magnusTpl from './templates/magnus.hbs'
 import sergeyTpl from './templates/sergey.hbs'
 import contactTpl from './templates/contact.hbs'
 import notFoundTpl from './templates/not-found.hbs'
+import playersTpl from './templates/players.hbs'
 
 const $app = $('#app')
+
+const playersList = {
+  'magnus':{
+    name: 'Magnus Carlsen',
+    image: 'https://cdn.worldchess.com/static/img/nyfide/carlsen_2x.png',
+    description: 'On March 28, 2016, Sergey Karjakin became the Challenger to Magnus Carlsen in the World Chess Championship 2016 after winning the Candidates Tournament 2016 in Moscow.'
+  },
+  'sergey': {
+    name: 'Sergey Karjakin',
+    image: 'https://cdn.worldchess.com/static/img/nyfide/karjakin_2x.png',
+    description: 'Carlsen is a former chess prodigy. He became a Grandmaster in 2004, at the age of 13 years, 148 days. This made him the third-youngest grandmaster in history.'
+  }
+}
 
 function index() {
   $app.html(homeTpl())
@@ -17,16 +31,13 @@ function contact() {
 }
 
 function players(ctx) {
-  let tpl = () => {}
-  switch (ctx.params.player) {
-    case 'magnus':
-      tpl = magnusTpl
-      break;
-    case 'sergey':
-      tpl = sergeyTpl
-      break;
+  if(playersList.hasOwnProperty(ctx.params.player)){
+    let player = playersList[ctx.params.player]
+    $app.html(playersTpl({player}))
   }
-  $app.html(tpl())
+  else{
+    notFound()
+  }
 }
 
 function notFound() {

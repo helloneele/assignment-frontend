@@ -13,12 +13,12 @@ const playersList = {
   'magnus':{
     name: 'Magnus Carlsen',
     image: 'https://cdn.worldchess.com/static/img/nyfide/carlsen_2x.png',
-    description: 'On March 28, 2016, Sergey Karjakin became the Challenger to Magnus Carlsen in the World Chess Championship 2016 after winning the Candidates Tournament 2016 in Moscow.'
+    description: 'Carlsen is a former chess prodigy. He became a Grandmaster in 2004, at the age of 13 years, 148 days. This made him the third-youngest grandmaster in history.'
   },
   'sergey': {
     name: 'Sergey Karjakin',
     image: 'https://cdn.worldchess.com/static/img/nyfide/karjakin_2x.png',
-    description: 'Carlsen is a former chess prodigy. He became a Grandmaster in 2004, at the age of 13 years, 148 days. This made him the third-youngest grandmaster in history.'
+    description: 'On March 28, 2016, Sergey Karjakin became the Challenger to Magnus Carlsen in the World Chess Championship 2016 after winning the Candidates Tournament 2016 in Moscow.'
   }
 }
 
@@ -35,9 +35,8 @@ function players(ctx) {
     let player = playersList[ctx.params.player]
     $app.html(playersTpl({player}))
   }
-  else{
+  else
     notFound()
-  }
 }
 
 function notFound() {

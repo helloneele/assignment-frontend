@@ -10,4 +10,6 @@ export function es5(list, val) {
 }
 
 export function es6(list, val) {
+  return list.includes(val);
+  //return list.some(elem => elem > val)
 }

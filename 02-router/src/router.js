@@ -26,7 +26,7 @@ function goto(route, init){
   if(result != null && result.length > 1 ){
     uri = result.slice(-1)[0]
     for (var r of ROUTES) {
-      if(r.slice(-1)[0].name.indexOf(result[0]) != -1)
+      if(r.slice(-1)[0].name.includes(result[0]))
         route = r[0];
     }
   }

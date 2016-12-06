@@ -15,5 +15,6 @@ export default function() {
   })
 
   it.skip('should show Promise behavior in ES6', () => {
+
   })
 }
